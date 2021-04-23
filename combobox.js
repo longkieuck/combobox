@@ -66,7 +66,7 @@ $(document).ready(function(){
         $(document).keydown(function(e){
             if(show === true){
                 //down
-                if(e.which === 40 || e.which === 39){
+                if(e.which === 40){
                     if(beforeSelected ==(a.length-1)){
                         beforeSelected = 0
                     }else beforeSelected++
@@ -74,7 +74,7 @@ $(document).ready(function(){
                     $("#txtGender").val(a[beforeSelected].text)
                 }
                 //up
-                if(e.which === 38 || e.which === 37){
+                if(e.which === 38){
                     if(beforeSelected == 0){
                         beforeSelected = a.length-1
                     }else beforeSelected--
@@ -97,6 +97,25 @@ $(document).ready(function(){
             $(this).siblings().removeClass('tr-before-selected');
         })
     })
+
+    jQuery.fn.extend({
+        getData: function() {
+        var tb = $("#table-option").attr("id");
+        if(tb == this.attr("id")) return a
+        },
+        getValue: function() {
+            var tb = $("#table-option").attr("id");
+            if(tb == this.attr("id")){
+                return a[selected].value
+            }
+        },
+        getText : function(){
+            var tb = $("#table-option").attr("id");
+            if(tb == this.attr("id")){
+                return a[selected].text
+            }
+        }
+      });
     
 })
 
