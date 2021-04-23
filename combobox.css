@@ -1,0 +1,11 @@
+tbody tr:hover{
+    background-color: #cccccc;
+    cursor: pointer;
+}
+
+.tr-selected{
+    background-color: greenyellow;
+}
+.tr-before-selected{
+    background-color: #cccccc;
+}
