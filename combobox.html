@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="combobox.css">
-    
+
 </head>
+
 <body>
-    <input type="text" id="txtGender">
-    <button id="btn-show">Click me!</button>
+
+    <div id="cover-input">
+        <input type="text" style="position: absolute;top: 200px;" tabindex="1" value="1">
+        <input type="text" style="position: absolute;top: 250px;" tabindex="3" value="3">
+        <input type="text" id="txtGender" tabindex="2">
+        <div id="btn-show"></div>
+    </div>
     <table id="table-option">
         <tbody>
         </tbody>
@@ -18,4 +25,5 @@
 </body>
 <script src="combobox.js">
 </script>
+
 </html>

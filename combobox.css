@@ -1,11 +1,68 @@
-tbody tr:hover{
-    background-color: #cccccc;
+tbody tr:hover {
+    background-color: #d8d8d8;
     cursor: pointer;
 }
 
-.tr-selected{
-    background-color: greenyellow;
+.tr-selected {
+    background-color: #029061;
+    color: white;
 }
-.tr-before-selected{
-    background-color: #cccccc;
+
+.tr-before-selected {
+    background-color: #d8d8d8;
 }
+
+#txtGender {
+    height: 35px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 10px;
+}
+
+#txtGender:focus {
+    border-style: solid;
+    border-color: green;
+    border-width: 1px;
+    outline: none;
+}
+
+#cover-input:focus {
+    border-style: solid;
+    border-color: green;
+    border-width: 1px;
+    outline: none;
+}
+
+#btn-show {
+    top: 8px;
+    position: absolute;
+    height: 39px;
+    /* background-color: green; */
+    width: 35px;
+    border-radius: 0 4px 4px 0;
+    border-width: 1px;
+    left: 149px;
+    border-left: 1px solid #bbbbbb;
+    background-image: url('ic.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+#btn-show:hover {
+    cursor: pointer;
+    border-color: green;
+    border-width: 1px;
+}
+
+td {
+    height: 39px;
+    width: 163px;
+    padding: 0 0 0 10px;
+}
+
+
+/* table {
+    border: 1px solid #bbbbbb;
+} */
