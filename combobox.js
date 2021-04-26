@@ -1,6 +1,6 @@
 $(document).ready(function() {
     let options = [{ text: "Nam", value: 0 }, { text: "Nữ", value: 1 }, { text: "Khác", value: 2 }, ]
-    let filterOptions = []
+    let filterOptions = [...options]
     let selected = { text: "", value: -1 }
     let curPosition = 0 //Vị trí con trỏ hiện tại
         //Ẩn
@@ -12,7 +12,7 @@ $(document).ready(function() {
 
         filterOptions = options.filter(i => i.text.includes(e.target.value))
 
-        $("tbody").empty()
+        // $("tbody").empty()
         loadOptions(filterOptions,selected)
         $("#table-option").show()
         $("tbody tr").mousedown(function(e) {
@@ -28,8 +28,8 @@ $(document).ready(function() {
             $("#table-option").hide()
             show = false
         } else {
-            filterOptions = [...options]
-            await $("tbody").empty()
+            filterOptions = await [...options]
+            // await $("tbody").empty()
             await loadOptions(filterOptions,selected)
             await $("#table-option").show()
             $("tbody tr").mousedown(function(e) {
@@ -41,7 +41,6 @@ $(document).ready(function() {
 
             $(function() {
                 $("#table-option > tbody > tr").mouseover(function() {
-                    // console.log($(this).attr("value"))
                     $("#txtGender").val(filterOptions[$(this).attr("value")].text)
                     $(this).siblings().removeClass('tr-before-selected');
                 })
@@ -74,6 +73,7 @@ $(document).ready(function() {
                 }
                 //up
                 if (e.which === 38) {
+
                     if (curPosition == 0) {
                         curPosition = filterOptions.length - 1
                     } else curPosition--
@@ -82,18 +82,24 @@ $(document).ready(function() {
                 }
                 if (e.which === 13) { //enter
                     selected = filterOptions[curPosition]
-                        // setTrSelectedStyle(selected)
                     $("#table-option").hide()
                     show = false
                     $("#txtGender").val(selected.text)
+                    curPosition = 0
                 }
                 if (e.which === 9) { //Tab
                     selected = filterOptions[curPosition]
-                        // setTrSelectedStyle(selected)
                     $("#table-option").hide()
                     show = false
                 }
 
+            }else{
+                filterOptions=[...options]
+                if (e.which === 40 && document.activeElement.id == "txtGender") {
+                    loadOptions(filterOptions,selected)
+                    $("#table-option").show()
+                    show=true
+                }
             }
         });
     });
@@ -120,6 +126,7 @@ $(document).ready(function() {
     $("#txtGender").focus(() => {
         $("#txtGender").css("border-color", "green")
     })
+
     $("#txtGender").blur(() => {
         let check = false
         let val = $("#txtGender").val()
@@ -132,25 +139,29 @@ $(document).ready(function() {
 })
 
 function loadOptions(options,selected){
+    $("tbody").empty()
     options.forEach(i => {
 
             if (i.value == selected.value) {
                 $('#table-option').append(`<tr class="tr-selected" value="${i.value}">
                             <td><div class="icon-selected">&#10004;</div>${i.text}</td>
                         </tr>`)
-            } else
+            } else if(i.value == options[0].value)
+            $('#table-option').append(`<tr class="tr-before-selected" value="${i.value}">
+            <td>${i.text}</td>
+                        </tr>`)
+                    else
                 $('#table-option').append(`<tr value="${i.value}">
                             <td>${i.text}</td>
                         </tr>`)
         })
-          
+
 }
 
 function setTrBeforeSelectedStyle(curPosition) {
-
+    $("#table-option > tbody > tr").siblings().removeClass('tr-before-selected');
     $("#table-option > tbody > tr").each(function(index, tr) {
         if ($(tr).attr("value") == curPosition) {
-            $(tr).siblings().removeClass('tr-before-selected');
             $(tr).addClass('tr-before-selected')
         }
     });
