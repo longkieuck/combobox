@@ -25,9 +25,6 @@ $(document).ready(function() {
                         </tr>`)
         })
 
-
-
-
         $("#table-option").show()
         $("tbody tr").click(function(e) {
             selected = options[$(this).attr("value")]
@@ -42,6 +39,7 @@ $(document).ready(function() {
             $("#table-option").hide()
             show = false
         } else {
+            filterOptions = [...options]
             await $("tbody").empty()
             await options.forEach(i => {
 
@@ -140,6 +138,9 @@ $(document).ready(function() {
         }
     });
 
+    $("#txtGender").focus(() => {
+        $("#txtGender").css("border-color", "green")
+    })
     $("#txtGender").blur(() => {
         let check = false
         let val = $("#txtGender").val()
