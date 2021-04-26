@@ -13,20 +13,9 @@ $(document).ready(function() {
         filterOptions = options.filter(i => i.text.includes(e.target.value))
 
         $("tbody").empty()
-        filterOptions.forEach(i => {
-
-            if (i.value == selected.value) {
-                $('#table-option').append(`<tr class="tr-selected" value="${i.value}">
-                            <td>${i.text}</td>
-                        </tr>`)
-            } else
-                $('#table-option').append(`<tr value="${i.value}">
-                            <td>${i.text}</td>
-                        </tr>`)
-        })
-
+        loadOptions(filterOptions,selected)
         $("#table-option").show()
-        $("tbody tr").click(function(e) {
+        $("tbody tr").mousedown(function(e) {
             selected = options[$(this).attr("value")]
             $("#txtGender").val(selected.text)
             $(this).siblings().removeClass('tr-selected');
@@ -41,20 +30,10 @@ $(document).ready(function() {
         } else {
             filterOptions = [...options]
             await $("tbody").empty()
-            await options.forEach(i => {
-
-                if (i.value == selected.value) {
-                    $('#table-option').append(`<tr class="tr-selected" value="${i.value}">
-                                    <td>${i.text}</td>
-                                </tr>`)
-                } else
-                    $('#table-option').append(`<tr value="${i.value}">
-                                    <td>${i.text}</td>
-                                </tr>`)
-            })
+            await loadOptions(filterOptions,selected)
             await $("#table-option").show()
-            $("tbody tr").click(function(e) {
-                selected = options[$(this).attr("value")]
+            $("tbody tr").mousedown(function(e) {
+                selected = filterOptions[$(this).attr("value")]
                 $("#txtGender").val(selected.text)
                 $(this).siblings().removeClass('tr-selected');
                 $(this).addClass('tr-selected')
@@ -63,7 +42,7 @@ $(document).ready(function() {
             $(function() {
                 $("#table-option > tbody > tr").mouseover(function() {
                     // console.log($(this).attr("value"))
-                    $("#txtGender").val(options[$(this).attr("value")].text)
+                    $("#txtGender").val(filterOptions[$(this).attr("value")].text)
                     $(this).siblings().removeClass('tr-before-selected');
                 })
             })
@@ -147,10 +126,25 @@ $(document).ready(function() {
         options.forEach(i => {
             if (i.text == val) check = true
         })
-        if (!check) $("#txtGender").css("border-color", "red")
+        if (check == false) $("#txtGender").css("border-color", "red")
         else $("#txtGender").css("border-color", "black")
     })
 })
+
+function loadOptions(options,selected){
+    options.forEach(i => {
+
+            if (i.value == selected.value) {
+                $('#table-option').append(`<tr class="tr-selected" value="${i.value}">
+                            <td><div class="icon-selected">&#10004;</div>${i.text}</td>
+                        </tr>`)
+            } else
+                $('#table-option').append(`<tr value="${i.value}">
+                            <td>${i.text}</td>
+                        </tr>`)
+        })
+          
+}
 
 function setTrBeforeSelectedStyle(curPosition) {
 
